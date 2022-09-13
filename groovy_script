@@ -1,0 +1,35 @@
+pipeline{
+	agent any
+	stages {
+		stage ('GET SOURCE CODE'){
+			steps {
+				sh '/root/jenkins_docker_pipeline/wrapper.sh pull_app_code'
+			}
+			
+		}
+		stage ('RUN DOCKER'){
+			steps {
+				sh '/root/jenkins_docker_pipeline/wrapper.sh run_docker'
+			}
+			
+		}
+		stage ('STAGE APP CODE'){
+			steps {
+				sh '/root/jenkins_docker_pipeline/wrapper.sh stage_app_code'
+			}
+			
+		}
+		stage ('BUILD DOCKER IMAGE'){
+			steps {
+				sh '/root/jenkins_docker_pipeline/wrapper.sh docker_image_build'
+			}
+			
+		}
+		stage ('BUILD DOCKER IMAGE CONTAINER'){
+			steps {
+				sh '/root/jenkins_docker_pipeline/wrapper.sh docker_image_container'
+			}
+			
+		}
+	}
+}
